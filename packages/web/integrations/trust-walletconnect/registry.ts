@@ -13,12 +13,12 @@ export const trustMobileInfo: Wallet = {
     {
       device: "mobile",
       os: "android",
-      link: "https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp",
+      link: "https://play.google.com/store/apps/details?id=com.wallet.crypto.trustapp&hl=en&gl=US&pli=1",
     },
     {
       device: "mobile",
       os: "ios",
-      link: "https://apps.apple.com/us/app/trust-crypto-bitcoin-wallet/id1288339409?mt=8",
+      link: "https://apps.apple.com/us/app/trust-wallet/id1567851089",
     },
     {
       link: "https://trustwallet.com/download",
@@ -29,13 +29,12 @@ export const trustMobileInfo: Wallet = {
     name: "Trust Wallet",
     projectId:
       "4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0",
-    encoding: "base64",
-    mobile: {
-      native: {
-        ios: "trustwallet:",
-        android: "intent:",
-      },
-    },
+    // mobile: {
+    //   native: {
+    //     ios: "trust:",
+    //     android: "intent:",
+    //   },
+    // },
     formatNativeUrl: (
       appUrl: string,
       wcUri: string,
@@ -44,13 +43,16 @@ export const trustMobileInfo: Wallet = {
     ): string => {
       const plainAppUrl = appUrl.replaceAll("/", "").replaceAll(":", "");
       const encodedWcUrl = encodeURIComponent(wcUri);
+      console.log(appUrl, wcUri);
+      console.log("encodedWcUrl");
+      console.log(encodedWcUrl);
       switch (os) {
         case "ios":
-          return `${plainAppUrl}://wcV2?${encodedWcUrl}`;
+          return `${plainAppUrl}://${encodedWcUrl}`;
         case "android":
-          return `${plainAppUrl}://wcV2?${encodedWcUrl}#Intent;package=com.wallet.crypto.trustapp;scheme=trust;end;`;
+          return `${plainAppUrl}://${encodedWcUrl}`;
         default:
-          return `${plainAppUrl}://wcV2?${encodedWcUrl}`;
+          return `${plainAppUrl}://${encodedWcUrl}`;
       }
     },
   },
